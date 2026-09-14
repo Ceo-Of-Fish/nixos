@@ -1,1 +1,5 @@
-
+TLDR:
+$ su root
+# nixos-rebuild boot --install-bootloader
+# reboot
+# passwd banana 
