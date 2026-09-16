@@ -4,19 +4,6 @@
   services.xserver.desktopManager.cinnamon.enable = true;
   services.xserver.displayManager.lightdm.enable = true;
 
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = true;
-      PermitRootLogin = "no";
-      AllowUsers = [ "banana" "root"];
-      MaxAuthTries = 3;
-      PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
-    };
-  };
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
@@ -41,7 +28,7 @@
   # Networking 
   networking.networkmanager.enable = true;
   # same as manully setting it in /etc/resolv.conf, will go onto next option is first isn't working.
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ]; # mullvad adblock dns, cloudflare dns, google dns
+#  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ]; # mullvad adblock dns, cloudflare dns, google dns
   
 
   # Docker
@@ -145,6 +132,7 @@
 
 
   environment.systemPackages = [
+    pkgs.nextcloud-client
     pkgs.godot_4
     pkgs.mullvad-browser
     pkgs.librewolf
@@ -197,22 +185,4 @@
     #loadModels = [ ];
   };
 
-  # Enable the NetBird client service
-  services.netbird = {
-    enable = true;
-    
-    # Automatically login using a setup key (recommended for servers)
-    # Ensure the setup key file is not copied to the Nix store if reusable
-#    login = {
-#      enable = true;
-#      setupKeyFile = "/path/to/your/setup-key"; 
-#    };
-
-#    # Open firewall ports for direct P2P connections
-#    openFirewall = true;
-#    openInternalFirewall = true;
-
-    # Optional: Enable the GUI client
-    ui.enable = true;
-  };
 }

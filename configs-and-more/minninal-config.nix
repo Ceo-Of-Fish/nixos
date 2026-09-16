@@ -108,7 +108,6 @@
     ];
   };
   environment.systemPackages = [
-    pkgs.home-manager # note that if ZSH isn't enabled, you will need to add "-f /etc/nixos/home.nix" to the end of home-manager switch
     ## browsers/browser related stuff.
     pkgs.mullvad-browser
     pkgs.librewolf
@@ -125,23 +124,4 @@
   
   programs.kdeconnect.enable = true;
  
-
-  # Enable the NetBird client service
-  services.netbird = {
-    enable = true;
-    
-    # Automatically login using a setup key (recommended for servers)
-    # Ensure the setup key file is not copied to the Nix store if reusable
-#    login = {
-#      enable = true;
-#      setupKeyFile = "/path/to/your/setup-key"; 
-#    };
-
-#    # Open firewall ports for direct P2P connections
-#    openFirewall = true;
-#    openInternalFirewall = true;
-
-    # Optional: Enable the GUI client
-    ui.enable = true;
-  };
 }

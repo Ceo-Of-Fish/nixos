@@ -12,6 +12,7 @@
       #./configs-and-more/minninal-config.nix # minninal config
       ./configs-and-more/zsh.nix # zsh config, can be disabled if wanted.
       ./configs-and-more/users.nix # control the users
-      ./configs-and-more/boot.nix # controls the boot
+      ./configs-and-more/boot.nix # controls the boot, change if you are on bios
+      ./configs-and-more/access-control.nix # manages netbird and ssh, disable if you don't want it
     ];
 }
