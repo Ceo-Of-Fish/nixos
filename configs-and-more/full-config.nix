@@ -132,6 +132,7 @@
 
 
   environment.systemPackages = [
+    pkgs.hyfetch
     pkgs.nextcloud-client
     pkgs.godot_4
     pkgs.mullvad-browser

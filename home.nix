@@ -1,6 +1,48 @@
-{ config, pkgs, ... }:
-
+{ config, inputs, pkgs, ... }:
 {
+  programs.firefox = {
+    enable = true;
+  
+    languagePacks = [ "en-US" ];
+  
+    profiles.banana = {
+      settings = {
+        "browser.startup.homepage" = "http://172.0.0.1:8888";
+        "privacy.resistFingerprinting" = true;
+      };
+  
+      search = {
+        engines = {
+          searx = {
+            name = "SearXNG";
+            urls = [
+              {
+                template = "http://127.0.0.1:8888/search?q={searchTerms}";
+              }
+            ];
+            iconMapObj."16" =
+              "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/searxng.svg";
+            definedAliases = [ "@searx" ];
+          };
+        };
+  
+        default = "searx";
+      };
+  
+      extensions.packages =
+        with inputs.firefox-addons.packages.${pkgs.system};
+        [
+          ublock-origin
+          bitwarden
+        ];
+    };
+  
+  policies = {
+    DisableTelemetry = true;
+  };
+};
+
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "banana";
@@ -17,24 +59,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.home-manager
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+  home.packages = with pkgs; [
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
