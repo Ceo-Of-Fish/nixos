@@ -1,5 +1,7 @@
 { config, inputs, pkgs, ... }:
 {
+
+
   programs.firefox = {
     enable = true;
   
@@ -7,10 +9,23 @@
   
     profiles.banana = {
       settings = {
-        "browser.startup.homepage" = "http://172.0.0.1:8888";
+        "browser.startup.homepage" = "http://127.0.0.1:4433/";
         "privacy.resistFingerprinting" = true;
       };
-  
+
+      containers = {
+        Google = {
+          color = "red";
+          icon = "fingerprint";
+          id = 2;
+        };
+        ceo-of-fish = {
+          color = "blue";
+          icon = "circle";
+          id = 1;
+        };
+      };
+
       search = {
         engines = {
           searx = {
@@ -24,11 +39,23 @@
               "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/searxng.svg";
             definedAliases = [ "@searx" ];
           };
+          hister = {
+            name = "Hister";
+            urls = [
+              {
+                template = "http://127.0.0.1:4433/?q={searchTerms}";
+              }
+            ];
+            iconMapObj."16" =
+              "https://hister.org/logo.png";
+            definedAliases = [ "@hister" ];
+          };
         };
-  
+      
         default = "searx";
+        order = [ "searx" "hister" "ddg" ];
       };
-  
+      
       extensions.packages =
         with inputs.firefox-addons.packages.${pkgs.system};
         [
@@ -37,14 +64,12 @@
         ];
     };
   
-  policies = {
-    DisableTelemetry = true;
+    policies = {
+      DisableTelemetry = true;
+    };
   };
-};
 
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "banana";
   home.homeDirectory = "/home/banana";
 
@@ -55,7 +80,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "26.05"; # Please read the comment before changing.
+  home.stateVersion = "26.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

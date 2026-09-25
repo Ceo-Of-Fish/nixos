@@ -15,5 +15,6 @@
       ./configs-and-more/boot.nix # controls the boot, change if you are on bios
       ./configs-and-more/access-control.nix # manages netbird and ssh, disable if you don't want it
       ./configs-and-more/searxng.nix
+      ./configs-and-more/hister.nix
     ];
 }
