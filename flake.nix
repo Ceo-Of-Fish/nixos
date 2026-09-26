@@ -2,7 +2,7 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     firefox-addons = {
@@ -24,7 +24,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.users.banana = ./home.nix;
-              home-manager.backupFileExtension = "hmbackup";
+              home-manager.backupFileExtension = "hmbackup-${inputs.self.lastModifiedDate}";
             }
           ];
         };

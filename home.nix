@@ -10,6 +10,22 @@
     profiles.banana = {
       settings = {
         "browser.startup.homepage" = "http://127.0.0.1:4433/";
+        
+       # Disable sponsored content on the New Tab page
+        "browser.newtabpage.activity-stream.showSponsored" = false;
+        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+        "browser.newtabpage.activity-stream.showSponsoredStories" = false;
+    
+        # Disable Pocket recommendations
+        "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+        "browser.newtabpage.activity-stream.feeds.section.topstories.options" = false;
+    
+        # Firefox tracking protection
+        "browser.contentblocking.category" = "strict";
+        "privacy.trackingprotection.enabled" = true;
+        "privacy.trackingprotection.socialtracking.enabled" = true;
+        "privacy.trackingprotection.cryptomining.enabled" = true;
+        "privacy.trackingprotection.fingerprinting.enabled" = true;
         "privacy.resistFingerprinting" = true;
       };
 
@@ -68,7 +84,10 @@
       DisableTelemetry = true;
     };
   };
-
+  xdg.desktopEntries.openwebui = {
+    name = "Open WebUI";
+    exec = "firefox --app=http://172.0.0.1:8080";
+  };
 
   home.username = "banana";
   home.homeDirectory = "/home/banana";

@@ -16,5 +16,6 @@
       ./configs-and-more/access-control.nix # manages netbird and ssh, disable if you don't want it
       ./configs-and-more/searxng.nix
       ./configs-and-more/hister.nix
+      ./configs-and-more/ai.nix
     ];
 }
