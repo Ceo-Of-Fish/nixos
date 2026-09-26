@@ -1,21 +1,16 @@
 { config, pkgs, inputs, ... }:
-# List of contents:
-# 1. services
-# 2. settings/options
-# 3. apps/user apps
-# 4. ZSH
 { 
   imports =
     [ 
-      ./hardware-configuration.nix
-      ./configs-and-more/full-config.nix # full config 
-      #./configs-and-more/minninal-config.nix # minninal config
-      ./configs-and-more/zsh.nix # zsh config, can be disabled if wanted.
-      ./configs-and-more/users.nix # control the users
-      ./configs-and-more/boot.nix # controls the boot, change if you are on bios
-      ./configs-and-more/access-control.nix # manages netbird and ssh, disable if you don't want it
-      ./configs-and-more/searxng.nix
-      ./configs-and-more/hister.nix
-      ./configs-and-more/ai.nix
+      ./hardware-configuration.nix # reqired
+      ./boot/uefi-boot.nix
+#      ./bios-boot.nix
+        ## Choose one
+      ./configs/full-config.nix
+#      ./configs/minnal-config.nix 
+#      ./configs/tty-config.nix
+        ## Device specifc items 
+#      ./configs/X140e-config.nix # Wip
+#      ./configs/Surface-Pro-4-config.nix # Wip 
     ];
 }
